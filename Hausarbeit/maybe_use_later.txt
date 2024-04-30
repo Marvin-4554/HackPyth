@@ -1,0 +1,31 @@
+    {% block stylesheets %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% endblock %}
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% endblock %}
+
+    <style>
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .user-story-details {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+
+        .user-story-details li {
+            margin-bottom: 10px;
+        }
+
+        .user-story-details li a {
+            margin-right: 10px;
+        }
+    </style>
+
+    {{ url_for('edit_user_story', user_story_id=user_story.id) }}
+
+    {{ url_for('delete_user_story', user_story_id=user_story.id) }}

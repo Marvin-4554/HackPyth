@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}User Story Details{% endblock %}
+
+{% block header %}
+    <h1>User Story Details</h1>
+{% endblock %}
+
+{% block content %}
+    <style>
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+    </style>
+
+    <div style="margin-top: 10px;">
+        <h2>The already created User Storys:</h2>
+    </div>
+    <div class="container">
+        <table class="table table-striped table-dark table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Story Points</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Created By</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user_story in user_stories %}
+                    <tr>
+                        <td scope="row">{{user_story[1]}}</td>
+                        <td scope="row">{{user_story[2]}}</td>
+                        <td scope="row">{{user_story[3]}}</td>
+                        <td scope="row">{{user_story[4]}}</td>
+                        <td scope="row">
+                            <a href="/user_story_edit" class="btn btn-primary">Edit</a>
+                            <a href="/user_story_delete" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

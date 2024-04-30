@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}User Story{% endblock %}
+
+{% block header %}
+    <h1>User Story</h1>
+{% endblock %}
+
+{% block content %}
+    <style>
+        .container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .input {
+            margin-bottom: 5px;
+            border: 2px solid #ccc;
+        }
+
+        .submit {
+            margin-top: 10px;
+        }
+
+        .user-story-details {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 20px;
+        }
+
+        .user-story-details li {
+            margin-bottom: 10px;
+        }
+
+        .user-story-details li a {
+            margin-right: 10px;
+        }
+    </style>
+    <div>
+        <h2>Create a User Story</h2>
+    </div>
+    <div class="container">
+        <div class="form-group">
+            <form action="/user_story_create" method="post">
+                <label for="title">User-Story</label>
+                <input type="text" class="input form-control" id="title" name="title" maxlength="300" required> 
+                <label for="story_points">Story Points</label>
+                <input type="text" class="input form-control" id="story_points" name="story_points" required>
+                <label for="status">Status</label>
+                <input type="text" class="input form-control" id="status" name="status" required>
+                <label for="created_by">Created By</label>
+                <input type="text" class="input form-control" id="created_by" name="created_by" required>
+                <button type="submit" class="submit btn btn-primary">Create</button>
+            </form>
+        </div>
+         
+    </div>
+{% endblock %}

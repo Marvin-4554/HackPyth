@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block header %} 
+    <h1 class="display-4">Welcome to your Software Project Help Desk!</h1>
+{% endblock %}
+
+{% block content %}
+<style>
+    .container {
+        text-align: center;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+</style>
+
+    <div class="container">
+        <h2 class="mt-2">This page is designed to help you with your Project</h2>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <img src="../static/software_project.webp" alt="Software Development" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-2">
+        <h2>What can you do here?</h2>
+        <ul>
+            <li><a href="{{ url_for('user_story_create') }}">Get started</a> with the planning of your project!</li>
+            {% if cookie %}
+            <li>You can see your User Stories right <a href="{{ url_for('user_story_details') }}">here</a></li>
+            <li>There you can edit or delete them as well</li>
+            
+            {% else %}
+            <li>If you don't have an account on this side you won't be able to use it's features</li>
+            
+            <li>So go and create your own account or just <a href="{{ url_for('login') }}">login</a> on the page</li>
+            {% endif %}
+
+        </ul>
+    </div>
+{% endblock %}

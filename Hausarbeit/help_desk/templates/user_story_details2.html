@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}User Story Details{% endblock %}
+
+{% block header %}
+    <h1>User Story Details</h1>
+{% endblock %}
+
+{% block content %}
+<style>
+    /*.container {
+        border-radius: 10px;
+        border: solid 2px #ccc;
+
+    }*/
+
+    .card {
+        border-radius: 10px;
+        border: solid 2px #aaa7a7;
+
+    }
+</style>
+
+    <div style="margin-top: 20px;">
+        <h2>The already created User Stories:</h2>
+    </div>
+    
+    <div class="container">
+        {% for user_story in user_stories %}
+        <div class="card my-4">
+            <div class="card-body">
+                <h3 class="card-title">{{ user_story[1] | safe }}</h3>
+                <p class="card-text">Story Points: {{ user_story[2] }}</p>
+                <p class="card-text">Status: {{ user_story[3] }}</p>
+                <p class="card-text">Created By: {{ user_story[4] }}</p>
+                <div class="d-flex justify-content-center">
+                    <a href="/user_story_edit/{{ user_story[0]}}" class="btn btn-primary mr-2" style="margin-right: 5px;">Edit</a>
+                    <a href="/user_story_delete/{{ user_story[0] }}" class="btn btn-danger" style="margin-left: 5px;">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
