@@ -46,14 +46,19 @@
     <div class="container">
         <div class="form-group">
             <form action="/user_story_create" method="post">
+                <!--CSRF-Fix in der maybe_use_later.txt-->
                 <label for="title">User-Story</label>
                 <input type="text" class="input form-control" id="title" name="title" maxlength="300" required> 
+                
                 <label for="story_points">Story Points</label>
                 <input type="text" class="input form-control" id="story_points" name="story_points" required>
+                
                 <label for="status">Status</label>
                 <input type="text" class="input form-control" id="status" name="status" required>
+                
                 <label for="created_by">Created By</label>
                 <input type="text" class="input form-control" id="created_by" name="created_by" required>
+                
                 <button type="submit" class="submit btn btn-primary">Create</button>
             </form>
         </div>

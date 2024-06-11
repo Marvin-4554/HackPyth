@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Shell{% endblock %}
+
+{% block header %} 
+    <h1 class="display-4">This is a shell application</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+    <form action="/shell" method="POST">
+        <input type="text" name="command" placeholder="Enter your command here">
+        <button type="submit">Execute</button>
+    </form>
+</div>
+
+{% if output %}
+    <div>
+        <p>{{ output }}</p>
+    </div>
+{% endif %}
+{% if error %}
+    <div>
+        <p>{{ error }}</p>
+    </div>
+{% endif %}
+
+{% endblock %}

