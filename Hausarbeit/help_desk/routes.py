@@ -302,7 +302,11 @@ def register():
 
 @app.route('/shell', methods=['GET', 'POST'])
 def shell():
-    
+    if 'username' not in session:
+        return redirect(url_for('login')) 
+    if session['username'] != 'admin':
+        flash("You are not authorized to access this page", category="danger")
+        return redirect(url_for('homepage')) 
     if request.method == 'POST':
         command = request.form['command']
         print(f"Command: {command}")
